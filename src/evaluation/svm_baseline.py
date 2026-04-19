@@ -208,6 +208,7 @@ def run_svm_experiments(
     raw_data_dir: Path,
     results_dir: Optional[Path] = None,
     max_length: Optional[int] = None,
+    max_samples: Optional[int] = None,
 ) -> Dict[str, Any]:
     """Train and evaluate SVM baseline configurations on TF-IDF features.
 
@@ -215,6 +216,7 @@ def run_svm_experiments(
         raw_data_dir: Path to the raw IMDB data directory.
         results_dir: Directory to save results. Defaults to REPORTS_DIR.
         max_length: Optional maximum token length per document.
+        max_samples: Optional maximum number of samples to use for testing.
 
     Returns:
         Dictionary with best results for each baseline type.
@@ -225,6 +227,23 @@ def run_svm_experiments(
     train_texts, train_labels, test_texts, test_labels = load_imdb_dataset(raw_data_dir)
     train_texts = preprocess_texts(train_texts, max_length=max_length)
     test_texts = preprocess_texts(test_texts, max_length=max_length)
+
+    # Optionally limit dataset size for testing
+    if max_samples is not None:
+        print(f"Limiting dataset to {max_samples} samples per split for testing...")
+        # Sample balanced data from both classes
+        n_per_class = max_samples // 2
+        pos_indices = [i for i, label in enumerate(train_labels) if label == 1][:n_per_class]
+        neg_indices = [i for i, label in enumerate(train_labels) if label == 0][:n_per_class]
+        train_sample_indices = sorted(pos_indices + neg_indices)
+        train_texts = [train_texts[i] for i in train_sample_indices]
+        train_labels = [train_labels[i] for i in train_sample_indices]
+
+        pos_test_indices = [i for i, label in enumerate(test_labels) if label == 1][:n_per_class]
+        neg_test_indices = [i for i, label in enumerate(test_labels) if label == 0][:n_per_class]
+        test_sample_indices = sorted(pos_test_indices + neg_test_indices)
+        test_texts = [test_texts[i] for i in test_sample_indices]
+        test_labels = [test_labels[i] for i in test_sample_indices]
 
     # SVM configurations - focusing on TF-IDF as it's typically better for SVM
     configs = [
@@ -407,5 +426,5 @@ def compare_svm_to_logistic_regression(
               "<+8.4f"
               "<+8.4f")
 
-    print("\nSVM Configuration:", svm_tfidf["config_name"] if svm_tfidf else "N/A")
-    print("LR Configuration:", lr_tfidf["config_name"] if lr_tfidf else "N/A")
+    print("\nSVM Configuration:", svm_tfidf.get("config_name", "N/A") if svm_tfidf else "N/A")
+    print("LR Configuration:", lr_tfidf.get("config_name", "N/A") if lr_tfidf else "N/A")
