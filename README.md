@@ -79,8 +79,8 @@ Once you have runs, summarize them here in a small table:
 
 | Model                    | Features   | Accuracy | F1-score |
 |--------------------------|-----------|----------|----------|
-| Logistic Regression      | BoW       | 0.XX     | 0.XX     |
-| Linear SVM               | TF-IDF    | 0.XX     | 0.XX     |
+| Logistic Regression      | BoW       | 0.86     | 0.87    |
+| Linear SVM               | TF-IDF    | 0.9     | 0.89    |
 
 Add a short note about what you learned from these results and what you plan to try next.
 
