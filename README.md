@@ -28,6 +28,22 @@ This script will:
 - print confusion matrices and classification reports
 - save run-level JSON metrics and a CSV summary to `reports/`
 
+### SVM Baseline
+
+For SVM-based baselines using the same TF-IDF features:
+
+```bash
+python src/evaluation/svm_baseline_main.py
+```
+
+This script will:
+- load and preprocess the IMDB data (same as LR baseline)
+- train SVM models with LinearSVC on TF-IDF features
+- evaluate performance and compare to Logistic Regression
+- save results to `reports/svm_baseline_results.csv`
+
+See `notebooks/svm_baseline_demo.ipynb` for an interactive demonstration.
+
 ## Baseline implementation
 
 The code now provides reusable API functions in `src/data/imdb_loader.py`, `src/preprocessing/text_preprocessing.py`, and `src/evaluation/baselines.py`.
@@ -36,14 +52,26 @@ The code now provides reusable API functions in `src/data/imdb_loader.py`, `src/
 
 - `load_imdb_dataset(raw_dir)` — load train/test texts and labels.
 - `preprocess_texts(texts, max_length)` — shared text cleaning and optional truncation.
-- `run_baseline_experiments(raw_data_dir, results_dir, max_length)` — run multiple model configurations and save results.
+- `run_baseline_experiments(raw_data_dir, results_dir, max_length)` — run multiple Logistic Regression model configurations and save results.
+- `run_svm_experiments(raw_data_dir, results_dir, max_length)` — run multiple SVM model configurations and save results.
+
+### SVM Baseline Details
+
+The SVM baseline in `src/evaluation/svm_baseline.py` provides:
+- `build_svm_pipeline()` — create TF-IDF + LinearSVC pipelines
+- `evaluate_svm_pipeline()` — compute metrics and print reports
+- `compare_svm_to_logistic_regression()` — direct performance comparison
+
+SVM models use LinearSVC for efficiency with sparse TF-IDF features.
 
 ## Baseline results
 
-After running the script, review the generated files in `reports/`:
+After running the scripts, review the generated files in `reports/`:
 
-- `baseline_results.csv` — summary table of all experiments and metrics.
-- `best_baseline_results_<timestamp>.json` — best-performing configuration details.
+- `baseline_results.csv` — summary table of all Logistic Regression experiments and metrics.
+- `svm_baseline_results.csv` — summary table of all SVM experiments and metrics.
+- `best_baseline_results_<timestamp>.json` — best-performing Logistic Regression configuration details.
+- `svm_vs_lr_comparison_<timestamp>.json` — comparison between SVM and LR performance.
 - individual JSON run artifacts for each configuration.
 
 ## Notes
