@@ -15,7 +15,8 @@ env/
 
 # Data
 data/raw/
-outputs/
+data/processed/
+
 
 # Secrets
 .env

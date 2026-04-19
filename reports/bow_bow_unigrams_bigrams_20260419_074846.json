@@ -1,0 +1,57 @@
+{
+  "baseline": "bow",
+  "config_name": "bow_unigrams_bigrams",
+  "vectorizer_params": {
+    "lowercase": true,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 3,
+    "max_df": 0.95,
+    "max_features": 30000
+  },
+  "classifier_params": {
+    "solver": "liblinear",
+    "penalty": "l2",
+    "C": 1.0,
+    "max_iter": 2000,
+    "random_state": 42
+  },
+  "metrics": {
+    "accuracy": 0.86796,
+    "precision": 0.8713766653209528,
+    "recall": 0.86336,
+    "f1": 0.867349809121961
+  },
+  "classification_report": {
+    "negative": {
+      "precision": 0.8646056282203726,
+      "recall": 0.87256,
+      "f1-score": 0.8685646028269958,
+      "support": 12500.0
+    },
+    "positive": {
+      "precision": 0.8713766653209528,
+      "recall": 0.86336,
+      "f1-score": 0.867349809121961,
+      "support": 12500.0
+    },
+    "accuracy": 0.86796,
+    "macro avg": {
+      "precision": 0.8679911467706627,
+      "recall": 0.8679600000000001,
+      "f1-score": 0.8679572059744785,
+      "support": 25000.0
+    },
+    "weighted avg": {
+      "precision": 0.8679911467706627,
+      "recall": 0.86796,
+      "f1-score": 0.8679572059744785,
+      "support": 25000.0
+    }
+  },
+  "timestamp": "2026-04-19T07:48:46.872764",
+  "n_train": 25000,
+  "n_test": 25000
+}
