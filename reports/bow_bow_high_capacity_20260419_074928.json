@@ -1,0 +1,57 @@
+{
+  "baseline": "bow",
+  "config_name": "bow_high_capacity",
+  "vectorizer_params": {
+    "lowercase": true,
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_df": 0.98,
+    "max_features": 50000
+  },
+  "classifier_params": {
+    "solver": "liblinear",
+    "penalty": "l2",
+    "C": 2.0,
+    "max_iter": 2000,
+    "random_state": 42
+  },
+  "metrics": {
+    "accuracy": 0.87132,
+    "precision": 0.8746468641536848,
+    "recall": 0.86688,
+    "f1": 0.8707461127405681
+  },
+  "classification_report": {
+    "negative": {
+      "precision": 0.8680517008960431,
+      "recall": 0.87576,
+      "f1-score": 0.8718888136673171,
+      "support": 12500.0
+    },
+    "positive": {
+      "precision": 0.8746468641536848,
+      "recall": 0.86688,
+      "f1-score": 0.8707461127405681,
+      "support": 12500.0
+    },
+    "accuracy": 0.87132,
+    "macro avg": {
+      "precision": 0.8713492825248639,
+      "recall": 0.87132,
+      "f1-score": 0.8713174632039427,
+      "support": 25000.0
+    },
+    "weighted avg": {
+      "precision": 0.871349282524864,
+      "recall": 0.87132,
+      "f1-score": 0.8713174632039424,
+      "support": 25000.0
+    }
+  },
+  "timestamp": "2026-04-19T07:49:28.098887",
+  "n_train": 25000,
+  "n_test": 25000
+}

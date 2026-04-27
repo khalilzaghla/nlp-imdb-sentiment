@@ -15,7 +15,37 @@ env/
 
 # Data
 data/raw/
-outputs/
+data/processed/
+
 
 # Secrets
 .env
+
+/wvSent_acl2011.pdf
+/explain.html
+
+# Models and large binaries
+models/**/*.joblib
+models/**/*.pkl
+models/**/*.bin
+models/**/*.pt
+models/**/*.h5
+
+# Outputs that are large or regenerable
+outputs/**/run_*/
+logs/
+
+# Data
+data/raw/
+data/processed/
+*.csv
+*.tsv
+*.jsonl
+
+
+
+
+outputs/
+!outputs/.gitkeep
+!outputs/**/metrics.txt
+!outputs/**/params.json
